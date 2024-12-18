@@ -2,9 +2,6 @@ from magica import *
 import os
 
 
-#  entrada = input('Selecione uma opção \n'
-#                     '[i]nserir [s]air [a]pagar [l]istar [g]uardar: '
-#                    )
 print("Bem-vindo ao programa de listas! Você pode criar listas de mercado, afazeres, ideias e muito mais. \n"
       "Sua lista sera salvaa automaticamente no bloco de notas. Por favor, aguarde enquanto o BOT salva sua lista.\n"
       'Espere 5 segundos')
