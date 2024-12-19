@@ -1,6 +1,7 @@
 from InquirerPy import prompt
 import os
 from bot_save_list import pega_lista
+import time
 
 def criar_lista():
     return []
@@ -33,6 +34,9 @@ def comecar(gatilho):
     lista = criar_lista()
 
     while gatilho:
+        
+        time.sleep(2)
+        print("Use as setinhas para navegar e o Enter para selecionar.")
         perguntas = [
             {
                 "type": "list",
