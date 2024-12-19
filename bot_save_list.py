@@ -6,7 +6,7 @@ def pega_lista(lista, nome_lista):
     
     pyautogui.press("win")
     pyautogui.write("Bloco de Notas")
-    time.sleep(1)
+    time.sleep(1.0)
     
     pyautogui.press("enter")
     time.sleep(0.5)
