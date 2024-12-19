@@ -1,106 +1,79 @@
-from bot_save_list import *
+from InquirerPy import prompt
 import os
+from bot_save_list import pega_lista
 
 def criar_lista():
-  return []
+    return []
 
-def inserir_item(lista, elemento):
-    os.system('cls')
-    lista.append(elemento)
-    os.system('cls')
-    return lista
+def inserir_item(lista, item):
+    lista.append(item)
+    print(f'Item "{item}" inserido na lista.')
 
-def sair(lista):
-  if not lista:
-    os.system('cls')
-    print("sua lista está vazia")
-    print()
-
-  else:
-    print('Sua lista ficou assim: ')
-    print()
-    for indice,item in enumerate(lista):
-      print(indice,'-', item)
-
-def apagar(lista,indice_apagar):
-  for indice,item in enumerate(lista):
-       print(indice,item)
-
-  try:
-    del lista[indice_apagar]
-    os.system('cls')
-
-  except IndexError:
-    os.system('cls')
-    print('Esse indice não existe')
-    print()
-
-  except:
-    print('Erro desconhecido')
-    print()
+def apagar(lista, indice):
+    try:
+        item = lista.pop(indice)
+        print(f'Item "{item}" removido da lista.')
+    except IndexError:
+        print('Índice inválido.')
 
 def listar(lista):
-  if not lista:
-    os.system('cls')
-    print('A lista está vazia')
-    print()
-    
-  else:
-      os.system('cls')
-
-      for indice,item in enumerate(lista):
-        # os.system('cls')
-        print('-'*5)
-        print(indice, '-', item)
+    if lista:
+        for i, item in enumerate(lista):
+            print(f'{i} - {item}')
+    else:
+        print('A lista está vazia.')
 
 def salvar_lista(lista, nome_lista):
-  print()
-  print("O bot irá salvar sua lista. Aguarde 5 segundos e, por favor, não mexa em nada. O programa se encerrará automaticamente.")
-  print()
-  pega_lista(lista, nome_lista)
-  sair(lista)
+    print()
+    print("O bot irá salvar sua lista. Aguarde 5 segundos e, por favor, não mexa em nada. O programa se encerrará automaticamente.")
+    print()
+    pega_lista(lista, nome_lista)
 
 def comecar(gatilho):
-  lista = criar_lista()
+    lista = criar_lista()
 
+    while gatilho:
+        perguntas = [
+            {
+                "type": "list",
+                "message": "Escolha uma opção",
+                "choices": [
+                    "Inserir",
+                    "Sair",
+                    "Apagar",
+                    "Listar",
+                    "Guardar"
+                ],
+                "name": "choices"
+            }
+        ]
+        entrada = prompt(perguntas)
 
+        if entrada["choices"] == 'Inserir':
+            elemento = input('O que você deseja inserir na lista? ')
+            inserir_item(lista, elemento)
+            os.system('cls')
 
-  # inserir um entrada_formatada para usar o lower()
-  while gatilho:
-    
-    entrada = input('Selecione uma opção \n'
-                    '[i]nserir [s]air [a]pagar [l]istar [g]uardar: '
-                   )
-    entrada_formatada = entrada.lower()
-    print()
+        elif entrada["choices"] == 'Sair':
+            gatilho = False
+            os.system('cls')
 
-    if entrada_formatada == 'i':
-      elemento = input('O que você deseja inserir na lista? ')
-      
-      inserir_item(lista,elemento)
+        elif entrada["choices"] == 'Apagar':
+            try:
+                indice_apagar = int(input('Qual índice deseja apagar? '))
+                apagar(lista, indice_apagar)
+            except ValueError:
+                print('Insira um número')
+            os.system('cls')
 
-    elif entrada_formatada == 's':
-      sair(lista)
-      gatilho = False
+        elif entrada["choices"] == 'Listar':
+            listar(lista)
+            input("Pressione Enter para continuar...")
+            os.system('cls')
 
-    elif entrada_formatada == 'a':
-      
-        
-          
-        try:
-          indice_apagar = int(input('Qual indice deseja apagar? ' ))
-          apagar(lista, indice_apagar)
-          
-          
-        except ValueError:
-          os.system('cls') 
-          print('Insira um número')
-
-    elif entrada_formatada == 'l':
-      listar(lista)
-
-    elif entrada_formatada == 'g':
-      print()
-      nome_lista = input('com qual nome deseja salvar essa lista? ')
-      salvar_lista(lista,nome_lista)
-      gatilho = False
+        elif entrada["choices"] == 'Guardar':
+            nome_lista = input('Com qual nome deseja salvar essa lista? ')
+            salvar_lista(lista, nome_lista)
+            gatilho = False
+            os.system('cls')
+    #print()

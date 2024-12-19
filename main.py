@@ -1,26 +1,25 @@
 from magica import *
 import os
-
+import time
 
 print("Bem-vindo ao programa de listas! Você pode criar listas de mercado, afazeres, ideias e muito mais. \n"
-      "Sua lista sera salvaa automaticamente no bloco de notas. Por favor, aguarde enquanto o BOT salva sua lista.\n"
+      "Sua lista será salva automaticamente no bloco de notas. Por favor, aguarde enquanto o BOT salva sua lista.\n"
       'Espere 5 segundos')
-time.sleep(8)
 
-iniciar = input('começar? (S/N) ')
+time.sleep(5)
+
+iniciar = input('Começar? (S/N) ')
 os.system('cls')
 
-iniciar_fomatado = iniciar.lower()
+iniciar_formatado = iniciar.lower()
 gatilho = None
 
-if iniciar_fomatado == 's':
-  gatilho = True
-  comecar(gatilho)
-
-elif iniciar_fomatado == 'n':
-  print('Programa encerrado')
-  gatilho = False
-
+if iniciar_formatado == 's':
+    gatilho = True
+    comecar(gatilho)
+elif iniciar_formatado == 'n':
+    print('Programa encerrado')
+    gatilho = False
 else:
-  print('Opção inválida')
-
+    print('Opção inválida')
+    #print()
